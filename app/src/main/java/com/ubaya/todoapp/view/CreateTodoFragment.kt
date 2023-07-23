@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -35,8 +37,10 @@ class CreateTodoFragment : Fragment() {
         val txtTitle = view.findViewById<TextInputEditText>(R.id.txtTitle)
         val txtNotes = view.findViewById<TextInputEditText>(R.id.txtNotes)
         val btnAdd = view.findViewById<Button>(R.id.btnAdd)
+        val radioGroupPriority = view.findViewById<RadioGroup>(R.id.radioGroupPriority)
         btnAdd.setOnClickListener {
-            var todo = Todo(txtTitle.text.toString(), txtNotes.text.toString())
+            var radio = view.findViewById<RadioButton>(radioGroupPriority.checkedRadioButtonId)
+            var todo = Todo(txtTitle.text.toString(), txtNotes.text.toString(), radio.tag.toString().toInt())
             val list = listOf(todo)
 
             viewModel.addTodo(list)
